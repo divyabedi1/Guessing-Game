@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 
-function guess(){
-    true_ans=$(ls -l |grep "^-"|wc -l)
-    while true;
+function guessing_game(){
+    local direc=$(ls -l | grep -v ^l | wc -l)
+    while [[1=1]]
     do
-        echo "Please enter your guess"
-        read  number
-        if [ $number -lt $true_ans ]
-        then
-            echo "Your guess is Less then the True Number"
-        elif [ $number -gt $true_ans ]
-        then
-            echo "Your guess is Greater then the True Number"
-        else
-            echo "Congratulations, You are Right!"
-        break;
+        echo "Try to guess the number of files in the directory?"
+        read number
+		if [[ "$number" =~ ^[0-9]+$ ]]
+		then		
+			if [ $number -lt $direc ]
+			then
+				echo "Your guess is Lesser than the actual number."
+			elif [ $number -gt $direc ]
+			then
+				echo "Your guess is Greater than the actual number."
+			else
+				echo "Congratulations, You are Right!"
+				break
+			fi
         fi
     done
 }
 echo "Guess the number of files in the current directory :)"
-guess
+guessing_game
