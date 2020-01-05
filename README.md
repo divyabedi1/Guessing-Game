@@ -1,2 +1,0 @@
-# Guessing-Game
-UNIX Project
